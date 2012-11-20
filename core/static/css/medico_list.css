@@ -1,0 +1,17 @@
+#row1 {
+    margin-top: 60px;
+    margin-bottom: 20px;
+}
+
+#icon-medico-list {
+    width: 130px;
+}
+
+#row2 {
+    margin-bottom: 20px;
+    padding-left: 37px;
+}
+
+#row2 input {
+    height: 30px;
+}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+    <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/medico_profile.css" />
+{% endblock %}
+
+
+{% block main_menu_options %}
+    <ul class="nav pull-right">
+        <li id="fat-menu" class="dropdown">
+            <a id="dLabel" role="button" class="dropdown-toggle" data-toggle="dropdown" href="#">
+                {{ user.profile.medico.nome }}
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <li>
+                    <a href="{% url logout %}">Sair</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <ul class="nav">
+        <li>
+            <a href="{% url home user.pk %}">Home</a>
+        </li>
+        <li>
+            <a href="{% url respostas user.pk %}">Mensagens</a>
+        </li>
+        <li>
+            <a href="{% url fale_conosco user.pk %}">Fale Conosco</a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <div class="medico-perfil">
+        <div class="row-fluid">
+            <div class="span3">
+                <h2>Paciente: {{ paciente.profile.paciente.nome }}</h2>
+                <hr/>
+            </div><!-- span8 -->
+        </div><!-- row-fluid -->
+        <div class="row-fluid coluna-informacoes-medico">
+            <div class="span3 offset4">
+                <table class="table table-bordered cool-background">
+                     <tr>
+                        <td>
+                            <p>E-mail: {{ paciente.email }}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Rg: {{ paciente.profile.paciente.rg }}</p>
+                        </td>
+                    </tr>
+                </table>
+            </div><!-- span5 -->
+        </div><!-- row-fluid -->
+    </div><!-- medico-perfil -->
+{% endblock %}

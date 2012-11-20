@@ -1,0 +1,113 @@
+#dock-container {
+    bottom: 0;
+    text-align: center;
+    padding-top: 85px;
+    width: 100%;
+}
+#dock {
+    display: inline-block;
+    position: relative;
+}
+#dock .base {
+    -moz-transform: rotateX(55deg);
+    -moz-transform-origin: 50% 100%;
+    -webkit-transform: rotateX(55deg);
+    -webkit-transform-origin: 50% 100%;;
+    background-color: #888888;
+    background-image: -moz-linear-gradient(center top , #333333, #999999);
+    border-bottom: 2px solid #AAAAAA;
+    bottom: 0;
+    height: 45px;
+    opacity: 0.5;
+    position: absolute;
+    width: 100%;
+    z-index: -10;
+}
+#dock ul {
+    font-size: 14px;
+    margin: 0;
+    padding: 0 30px;
+}
+#dock li {
+    display: inline-block;
+    list-style-type: none;
+    position: relative;
+}
+#dock li span {
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+    border-radius: 12px 12px 12px 12px;
+    bottom: 140px;
+    display: none;
+    left: 0;
+    padding: 4px 0;
+    position: absolute;
+    width: 100%;
+}
+#dock li:hover span {
+    display: block;
+}
+#dock li img {
+    -webkit-transition: all .4s ease 0s;
+    -webkit-transform-origin: 50% 100%;
+    -moz-transform-origin: 50% 100%;
+    -moz-transition: all 0.4s ease 0s;
+    transition-duration: 1.5s, 1.5s;
+    height: 64px;
+    margin-bottom: 10px;
+    width: 64px;
+}
+#dock li:hover img {
+    -webkit-transform: scale(1.5);
+    -moz-transform: scale(2);
+    margin: 0 2em 10px;
+}
+#dock li:hover + li img, #dock li.prev img {
+    -webkit-transform: scale(1.5);
+    -moz-transform: scale(1.4);
+    margin: 0 1.4em 10px;
+}
+
+#cadastro-usuario {
+    border: 2px solid;
+    border-radius:25px;
+    box-shadow: 10px 10px 5px #888888;
+    text-align: left;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+    margin-bottom: 30px;
+}
+
+.cadastro-paciente-form {
+    margin: 15px 0px 17px 219px;
+}
+
+.cadastro-paciente-error {
+    width: 73% !important;
+    text-align: center !important;
+}
+
+.cadastro-paciente-error p {
+    padding-top: 12px !important;
+}
+
+#cadastro-form-placeholder {
+    text-align: center;
+    padding-top: 10px;
+}
+
+#cadastro-title {
+    text-align: center;
+}
+
+#legend-user-type {
+    width: 80%;
+}
+
+.controls input {
+    height: 25px;
+}
+
+#enviando {
+}

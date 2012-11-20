@@ -1,0 +1,5 @@
+<form action="{% url cadastrar_paciente %}" method="post">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" class="btn" value="Enviar"/>
+</form>

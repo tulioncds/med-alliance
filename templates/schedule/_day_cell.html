@@ -1,0 +1,16 @@
+{% load scheduletags %}
+{% ifnotequal day.start.month month.start.month %}
+  <td class="{{size}} daynumber noday"></td>
+{% else %}
+  {% if not day|check_day_available %}
+    <td class="{{size}} daynumber busy">
+  {% else %}
+    <td class="{{size}} daynumber free">
+  {% endif %}
+    <div class="header">
+        <a class="a-dia" href="#" data-url="{% url day_calendar calendar.slug %}{% querystring_for_date day.start 3 %}">
+            <b>{{day.start.day}}</b>
+        </a>
+    </div>
+</td>
+{% endifnotequal %}

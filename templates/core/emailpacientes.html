@@ -1,0 +1,12 @@
+<div id="admin_email_pacientes" class="wrap-add">
+    <form id="admin_email_pacientes_form" class="wrap-form" action="{% url admin_email_pacientes %}" method="post">
+        <h2 id="mass_tagging_title" class="title-modal">Enviar email para Pacientes:</h2>
+        <div id="errors"></div>
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% for email in emails %}
+            <input type="hidden" name="destinatario" value="{{email}}"/>
+        {% endfor %}
+        <input id="admin_email_pacientes_submit_btn" class="bt-add" type="submit" value="Enviar" />
+    </form>
+</div>

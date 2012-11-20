@@ -1,0 +1,8 @@
+<script type="text/javascript" src="{{STATIC_URL}}jquery/js/jquery.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}jquery/js/jquery.formset.js"></script>
+{% load pessoa_tags %}
+<form id="pessoa_form" name="input" action="" method="POST">
+{% csrf_token %}
+{{object}}
+<input type="submit" />
+</form>

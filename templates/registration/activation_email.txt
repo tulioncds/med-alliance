@@ -1,0 +1,5 @@
+Med Alliance:
+
+Acesse o site : {{site}}/contas/ativar/{{activation_key}}/ para ativar a sua conta conosco.
+
+Você tem {{expiration_days}} dia(s) para ativá-la, caso contrário, seu cadastro será invalidado.

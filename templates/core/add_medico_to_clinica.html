@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load bootstrap %}
+
+{% block content %}
+<div class="voltar_btt"> 
+	<a class="brand" href="{% url auth %}">
+		<img src="{{STATIC_URL}}img/back.png"/><br /> voltar
+    </a>
+    <div class="row">
+        <div class="container">
+            <div class="form-consulta cool-background ">
+                <form class="form-horizontal edit-medico-form" action="{% url add_medico_to_clinica user.pk %}" method="post">
+                    <legend id="legend-user-type">Escolha um médico para ser atribuído à clínica</legend>
+                    {% csrf_token %}
+                    {{ form|bootstrap }}
+                    <div class="control-group">
+                        <div class="controls">
+                            <input type="submit" class="btn" value="Atribuir"/>
+                        </div><!-- controls -->
+                    </div><!-- control-group -->
+                </form>
+            </div><!-- edit-paciente-form -->
+        </div><!-- container -->
+    </div><!-- row -->
+{% endblock %}

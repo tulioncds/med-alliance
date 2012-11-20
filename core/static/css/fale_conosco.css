@@ -1,0 +1,24 @@
+#fale-conosco {
+    left: 35%;
+    position: fixed;
+    margin-top: 16%;
+    padding: 2%;
+}
+
+#id_conteudo {
+    width: 500px;
+}
+
+#id_titulo {
+    width: 500px;
+}
+
+.controls input {
+    height: 25px !important;
+}
+
+#imagens-fale-conosco {
+   float: right;
+   margin-right: 43%;
+   margin-top: 3%;
+}

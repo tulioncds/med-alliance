@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div id="bem-vindo">
+            <img src="{{STATIC_URL}}img/medalliance3.png">
+        </div><!-- bem-vindo -->
+        <div class="hero-unit cool-background ativacao-sucesso-hero">
+            <div class="row">
+                <h1><img class="sucesso-icon" src="{{STATIC_URL}}img/sucesso.png"/>   Ativação Completa!</h1>
+                <hr/>
+                <p>Seja bem-vindo, seu usuário já está habilitado para utilização do sistema.</p>
+                <p>
+                <hr/>
+                <a class="btn btn-primary btn-large" href="{% url login %}">Login</a>
+                </p>
+            </div><!-- row -->
+        </div><!-- hero-unit -->
+    </div><!-- container -->
+{% endblock %}

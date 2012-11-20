@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load bootstrap %}
+
+{% block extrahead %}
+    <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/edit_medico.css" />
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div id="edit-medico-icon-container">
+            <img id="edit-medico-icon" src="{{STATIC_URL}}img/edit_medico.png"/>
+        </div><!-- edit-paciente-icon-container -->
+        <div class="edit-medico-form cool-background">
+            <form class="form-horizontal edit-medico-form" action="{% url edit_medico medico_id %}" method="post">
+                <legend id="legend-user-type">Edite seus dados</legend>
+                {% csrf_token %}
+                {% if form.errors %}
+                    <p class="error">Invalid user and/or password</p>
+                {% endif %}
+                {{ form|bootstrap }}
+                <div class="control-group">
+                    <div class="controls">
+                        <input type="submit" class="btn" value="Enviar"/>
+                        <form name="cancelar_edit" action="{% url auth %}" method="get">
+            	           <input type="submit" class="btn" value="Cancelar"/>
+                        </form>
+                    </div><!-- controls -->
+                </div><!-- control-group -->
+            </form>
+        </div><!-- edit-paciente-form -->
+    </div><!-- container -->
+{% endblock %}

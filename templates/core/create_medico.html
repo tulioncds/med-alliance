@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% load bootstrap %}
+
+{% block extrahead %}
+    <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/edit_medico.css" />
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="edit-medico-form cool-background">
+            <form class="form-horizontal edit-medico-form" action="{% url create_medico user.pk %}" method="post">
+                <legend id="legend-user-type">Adicionar novo médico</legend>
+                {% csrf_token %}
+                {{ form|bootstrap }}
+                <div class="control-group">
+                    <div class="controls">
+                        <input type="submit" class="btn" value="Salvar"/>
+                         <form name="cancelar_edit" action="{% url auth %}" method="get">
+            	             <input type="submit" class="btn" value="cancelar"/>
+                         </form>
+                    </div><!-- controls -->
+                </div><!-- control-group -->
+            </form>
+        </div><!-- edit-paciente-form -->
+    </div><!-- container -->
+{% endblock %}

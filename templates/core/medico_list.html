@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+
+{% block extrahead %}
+    <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/medico_list.css" />
+    <script type="text/javascript" src="{{ STATIC_URL }}js/medico_list.js"></script>
+{% endblock %}
+
+{% block main_menu_options %}
+    <ul class="nav pull-right">
+        <li id="fat-menu" class="dropdown">
+            <a id="dLabel" role="button" class="dropdown-toggle" data-toggle="dropdown" href="#">
+                {{ user.username }}
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <li>
+                    <a href="{% url edit_paciente user.pk %}">Editar</a>
+                </li>
+                <li>
+                    <a href="{% url delete_paciente user.pk %}">Excluir Conta</a>
+                </li>
+                <li>
+                    <a href="{% url logout %}">Sair</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <ul class="nav">
+        <li>
+            <a href="{% url home user.pk %}">Home</a>
+        </li>
+        <li class="active">
+            <a href="{% url medico_list user.pk %}">Médicos</a>
+        </li>
+        <li>
+            <a href="{% url ver_respostas user.pk %}">Mensagens</a>
+        </li>
+        <li>
+            <a href="{% url fale_conosco user.pk %}">Fale Conosco</a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <div id="row1" class="row offset11">
+        <div class="span3">
+            <img id="icon-medico-list" src="{{STATIC_URL}}img/medico.png">
+        </div><!-- span3 -->
+    </div><!-- row1 -->
+    <div id="row2" class="row offset7">
+        <div class="span3">
+            <form action="{% url medico_list user.pk %}" method="get">
+                <table class="table table-bordered">
+                    <tr>
+                        <th colspan="3" style="text-align: center;">Filtros</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Nome:</label>
+                            <input type="text" name="nome">
+                        </td>
+                        <td>
+                            <label>Especialidade:</label>
+                            <select class="especialidade" name="especialidade">
+                                <option value="todas">Todas</option>
+                                {% for especialidade in especialidades %}
+                                    <option value="{{ especialidade.0 }}">{{ especialidade.1 }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td>
+                            <label>Clínica:</label>
+                            <select class="clinica" name="clinica">
+                                <option value="todas">Todas</option>
+                                {% for clinica in clinicas %}
+                                    <option value="{{ clinica }}">{{ clinica }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div><!-- span3 -->
+    </div><!-- row2 -->
+    <div id="row3" class="row offset6">
+        <div class="span12">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Foto</th>
+                        <th>Nome</th>
+                        <th>Especialidade</th>
+                        <th>CRM</th>
+                        <th>Clínica</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if object_list %}
+                        {% for object in object_list %}
+                            <tr>
+                                <td>
+                                    <p>foto</p>
+                                </td>
+                                <td>
+                                    <p><a href="{% url nova_consulta user.pk %}?id_medico={{ object.pk}}">{{ object.nome }}</a></p>
+                                </td>
+                                <td>
+                                    <p>{{ object.especialidade }}</p>
+                                </td>
+                                <td>
+                                    <p>{{ object.crm }}</p>
+                                </td>
+                                <td>
+                                    <p>{{ object.clinica }}</p>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        {% if is_paginated %}
+                            <tfoot>
+                                <tr>
+                                     <td colspan="5" style="text-align: center;">
+                                        <span class="page-links">
+                                            {% if page_obj.has_previous %}
+                                                <a href="{% url medico_list user.pk %}?page={{ page_obj.previous_page_number }}">anterior</a>
+                                            {% endif %}
+                                            <span class="page-current">
+                                                Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+                                            </span>
+                                            {% if page_obj.has_next %}
+                                                <a href="{% url medico_list user.pk %}?page={{ page_obj.next_page_number }}">próximo</a>
+                                            {% endif %}
+                                        </span>
+                                    </td>
+                                </tr>
+                            <tfoot>
+                        {% endif %}
+                    {% else %}
+                        <tr>
+                            <td colspan="5" style="text-align: center;"">
+                                <p>Nenhum médico a ser exibido</p>
+                            </td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div><!-- span12 -->
+    </div><!-- row3 -->
+{% endblock %}

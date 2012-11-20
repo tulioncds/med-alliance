@@ -1,0 +1,10 @@
+<span class="title">
+	{% if user.profile.tipo_usuario == 'M' %}
+		{{ occurrence.title }} <br />
+        <a class="brand detalhe-paciente" href="{% url dados_paciente user.pk occurrence.event.creator.id %}"> >> sobre o paciente </a>
+	{% elif user.profile.paciente.nome == occurrence.title and user.profile.tipo_usuario == 'P' %}
+		<b>Sua consulta agendada neste horário<br /></b>
+	{% else %}
+		Horário agendado por outro paciente
+	{% endif %}
+</span>

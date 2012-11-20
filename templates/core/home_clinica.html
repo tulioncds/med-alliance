@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block extrahead %}
+    <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/home_paciente.css" />
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-dropdown.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/dropdowns.js"></script>
+{% endblock %}
+
+{% block main_menu_options %}
+    <ul class="nav pull-right">
+        <li id="fat-menu" class="dropdown">
+            <a id="dLabel" role="button" class="dropdown-toggle" data-toggle="dropdown" href="#">
+                {{ user.username }}
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <li>
+                    <a href="{% url edit_clinica user.pk %}">Editar</a>
+                </li>
+                <li>
+                    <a href="{% url delete_clinica user.pk %}">Excluir Conta</a>
+                </li>
+                <li>
+                    <a href="{% url logout %}">Sair</a>
+                </li>
+                <li>
+                    <a href="{% url clinica_medico_list  user.pk %}">medicos</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <ul class="nav">
+        <li class="active">
+            <a href="{% url home user.pk %}">Home</a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <div id="row1" class="row">
+        <div class="span3 offset11 logo-home-paciente">
+            <img src="{{STATIC_URL}}img/medalliance3.png"/>
+        </div><!-- span3 -->
+        <div class="span5 offset4 cool-background notificacoes-home-paciente">
+            <legend class="notificacao">Notificações</legend>
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <ul>
+                    <li>
+                        <p>Sem notificações </p>
+                    </li>
+                </ul>
+            {% endif %}
+        </div><!-- span9 -->
+    </div><!-- row1 -->
+    <div id="row2" class="row">
+        <div class="container">
+            <div id="row-interna-1" class="row">
+                <div id="row-interna-medico" class="span4">
+                    <h3>Adicionar médicos</h3>
+                    <p>Adicione um médico que faça parte da clínica.</p>
+                    <a class="btn btn-primary btn-large" href="{% url create_medico user.pk %}">Adicionar médico »</a>
+                </div>
+                <div id="row-interna-medico" class="span4">
+                    <h3>Atribuir médico à Clínica</h3>
+                    <p>Atribua um médico que já é usuário do sistema à Clínica.</p>
+                    <a class="btn btn-primary btn-large" href="{% url add_medico_to_clinica user.pk %}">Atribuir médico »</a>
+                </div>
+            </div><!-- row-interna-1 -->
+        </div><!-- container -->
+    </div><!-- row2 -->
+{% endblock %}

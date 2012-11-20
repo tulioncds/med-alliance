@@ -1,0 +1,11 @@
+{% load scheduletags %}
+<div class="prevnext">
+    <a class="nav-calendar" data-url="{% prev_url target slug period %}" href="#">
+        <img align="top" border="0" src="/static/schedule/img/left_mod.png"/>
+    </a> 
+    &nbsp; <b>{{period_name}}</b> &nbsp; 
+    <a class="nav-calendar" data-url="{% next_url target slug period %}" href="#">
+        <img align="top" border="0" src="/static/schedule/img/right_mod.png"/>
+    </a>
+</div>
+

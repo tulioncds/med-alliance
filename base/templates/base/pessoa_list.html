@@ -1,0 +1,45 @@
+<script type="text/javascript" src="{{STATIC_URL}}jquery/js/jquery.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}jquery/js/jquery.formset.js"></script>
+<ul>
+{%for object in object_list%}
+<li>
+<strong>Pessoa: <a href='{% url pessoa_editar object.id %}'>{{ object.nome }}</a> </strong><br />
+id: {{ object.id }}<br />
+{{ object.cpf }} <br />
+{{ object.rg }} <br />
+{{ object.cnpj }} <br />
+{{ object.razao_social }} <br />
+
+{%for endereco in object.enderecos.all %}
+<strong>Endereço</strong><br />
+{{ endereco.get_tipo_display }}
+{{ endereco.logradouro }} - {{ endereco.numero }} -{{ endereco.complemento }} <br />
+{{ endereco.bairro }} - {{ endereco.cep }} - {{ endereco.cidade }} - {{endereco.uf}}<br />
+{% endfor %}
+
+{%for telefone in object.telefones.all %}
+<strong>Telefone</strong><br />
+{{ telefone.get_tipo_display }} - {{ telefone.numero }} -{{ telefone.ramal }} <br />
+{% endfor %}
+
+{%for email in object.emails.all %}
+<strong>E-mail</strong><br />
+{{ email.email }} <br />
+{% endfor %}
+
+{%for contato in object.contatos.all %}
+<strong>Contato</strong><br />
+{{ contato.facebook }} <br />
+{{ contato.twitter }} <br /> 
+{{ contato.blog }} <br />
+{{ contato.orkut }} <br />
+{{ contato.site }} <br />
+{{ contato.msn }} <br />
+{% endfor %}
+<br />
+<a href='{% url pessoa_delete object.id %}'>APAGAR: {{ object.nome }}</a> 
+</li>
+<br />
+{% endfor %}
+</ul>
+<a href='{% url pessoa_cadastro %}'>Adicionar nova pessoa</a>

@@ -1,0 +1,9 @@
+language-pack-pt
+language-pack-pt-base
+build-essential
+python-dev
+python-psycopg2
+python-pip
+apache2
+libapache2-mod-wsgi
+postgresql

@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block extrahead %}
+    <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/home_paciente.css" />
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-dropdown.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/dropdowns.js"></script>
+{% endblock %}
+
+{% block main_menu_options %}
+    <ul class="nav pull-right">
+        <li id="fat-menu" class="dropdown">
+            <a id="dLabel" role="button" class="dropdown-toggle" data-toggle="dropdown" href="#">
+                {{ user.username }}
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <li>
+                    <a href="{% url edit_paciente user.pk %}">Editar</a>
+                </li>
+                <li>
+                    <a href="{% url delete_paciente user.pk %}">Excluir Conta</a>
+                </li>
+                <li>
+                    <a href="{% url logout %}">Sair</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <ul class="nav">
+        <li class="active">
+            <a href="{% url home user.pk %}">Home</a>
+        </li>
+        <li>
+            <a href="{% url medico_list user.pk %}">Médicos</a>
+        </li>
+        <li>
+            <a href="{% url ver_respostas user.pk %}">Mensagens</a>
+        </li>
+        <li>
+            <a href="{% url fale_conosco user.pk %}">Fale Conosco</a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <div id="row1" class="row">
+        <div class="span3 offset11 logo-home-paciente">
+            <img src="{{STATIC_URL}}img/medalliance3.png"/>
+        </div><!-- span3 -->
+        <div class="span5 offset4 cool-background notificacoes-home-paciente">
+            <legend class="notificacao">Notificações</legend>
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <ul>
+                    <li>
+                        <p>Sem notificações </p>
+                    </li>
+                </ul>
+            {% endif %}
+        </div><!-- span9 -->
+    </div><!-- row1 -->
+    <div id="row2" class="row">
+        <div class="container">
+            <div class="hero-unit cool-background">
+                <h2>Marcação de consultas</h2>
+                <hr/>
+                <p>Escolha abaixo se deseja pesquisar médicos, clínicas ou consultar datas disponíveis.</p>
+            </div><!-- hero-unit -->
+            <div id="row-interna-1" class="row">
+                <div id="row-interna-medico" class="span4">
+                    <h3>Médicos</h3>
+                    <p>Liste médicos disponíveis e escolha o de sua preferência.</p>
+                    <a class="btn btn-primary btn-large" href="{% url medico_list user.pk %}">Médicos »</a>
+                </div>
+                <div id="row-interna-clinica" class="span4">
+                    <h3>Clínicas</h3>
+                    <p>Liste e escolha clínicas disponíveis e em seguida escolha um médico.</p>
+                    <a class="btn btn-primary btn-large">Clínicas »</a>
+                </div>
+                <div id="row-interna-calendario" class="span4">
+                    <h3>Calendário</h3>
+                    <p>Selecione uma data e/ou hora e em seguida escolha um médico disponível.</p>
+                    <a class="btn btn-primary btn-large" href="#">Calendário »</a>
+                </div>
+            </div><!-- row-interna-1 -->
+        </div><!-- container -->
+    </div><!-- row2 -->
+{% endblock %}

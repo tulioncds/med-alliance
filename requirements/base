@@ -1,0 +1,9 @@
+django
+unidecode
+south
+geopy
+django-bootstrap-form
+python-dateutil
+vobject
+workdays
+requests

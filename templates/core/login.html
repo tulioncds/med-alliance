@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Med Alliance{% endblock %}
+
+{% block main_menu_options %}
+    <p class="navbar-text pull-right navbar-text-medalliance">
+    <a href="{% url registration_cadastro %}" class="navbar-link">Cadastrar-se</a>
+    </p>
+    <div id="fb-root"> </div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
+	  </script>
+{% endblock %}
+
+{% block content %}
+
+    <div class=login-error>
+        {% if messages %}
+            <ul class="messages alert alert-error">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}><p>{{ message }}</p></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div><!-- login-error -->
+    <div id="main-login-wrapper">
+        <div class="container-fluid main-login-content-wrapper">
+            <div class="row-fluid">
+                <div class="span9">
+                    <div class="login-hero cool-background">
+                        <img id="login-icon" src="{{STATIC_URL}}img/medalliance3.png"/>
+                        <h1>Med Alliance</h1>
+                        <hr/>
+                        <p class="main-description">Sistema facilitador de negociação entre médicos e pacientes. Facilidades no pagamento e agendamento de consultas.</p>
+                          <script src="http://www.google.com/jsapi"></script>
+                        <hr/>
+                        <p>
+                            <a class="btn btn-primary btn-large">Saiba mais</a>
+                        </p>
+                    </div><!-- hero-unit -->
+                </div><!-- span9 -->
+                <div class="span3">
+                    <div class="well well-login sidebar-nav cool-background">
+                        <form class="form-horizontal" action="{% url login %}" method="post">
+                            {% csrf_token %}
+                            {% if form.errors %}
+                                <p class="error">Invalid user and/or password</p>
+                            {% endif %}
+                            <legend>Entrar</legend>
+                            <div class="control-group">
+                        	    <label class="control-label login-form">Nome de usuário</label>
+                                <div class="controls">
+                                    <input class="login-input" type="text" name="username" autofocus="true" placeholder="Email"/>
+                                </div><!-- controls -->
+                            </div><!-- control-group -->
+                            <div class="control-group">
+                        	    <label class="control-label login-form">Senha</label>
+                                <div class="controls">
+                                    <input class="login-input" type="password" name="password" placeholder="Senha"/>
+                                </div><!-- controls -->
+                                <!--<input type="hidden" name="next" value="" />-->
+                            </div><!-- control-group -->
+                            <div class="controls">
+                                <input type="submit" class="btn" value="Enviar"/>
+                            </div><!-- controls -->
+                        </form>
+                    </div><!-- well -->
+                </div><!-- span3 -->
+            </div><!-- row-fluid -->
+        </div><!-- container-fluid -->
+        <div class="fb-like" data-href="http://www.facebook.com/MedAADS6" data-send="true" data-width="450" data-show-faces="true" data-font="arial"></div>
+    </div><!-- main-login -->
+{% endblock %}
+
+{% block extrafooter %}
+    <div class="container-fluid">
+        <hr/>
+        <span>© Deu Águia 2012</span>
+    </div>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block extrahead %}
+    <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/home_paciente.css" />
+    <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/paciente_respostas.css" />
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-dropdown.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/dropdowns.js"></script>
+{% endblock %}
+
+{% block main_menu_options %}
+    <ul class="nav pull-right">
+        <li id="fat-menu" class="dropdown">
+            <a id="dLabel" role="button" class="dropdown-toggle" data-toggle="dropdown" href="#">
+                {{ user.username }}
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <li>
+                    <a href="{% url edit_paciente user.pk %}">Editar</a>
+                </li>
+                <li>
+                    <a href="{% url delete_paciente user.pk %}">Excluir Conta</a>
+                </li>
+                <li>
+                    <a href="{% url logout %}">Sair</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <ul class="nav">
+        <li>
+            <a href="{% url home user.pk %}">Home</a>
+        </li>
+        <li>
+            <a href="{% url medico_list user.pk %}">Médicos</a>
+        </li>
+        <li class="active">
+            <a href="{% url ver_respostas user.pk %}">Mensagens</a>
+        </li>
+        <li>
+            <a href="{% url fale_conosco user.pk %}">Fale Conosco</a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <h2 class="perguntas-title">Histórico de Perguntas</h2>
+    {% if respostas %}
+        {% for resposta in respostas %}
+            <hr/>
+            <div id="form-container" class="cool-background">
+                <div id="pergunta">
+                    <h3>Pergunta:</h3>
+                    <p>{{ resposta.pergunta }}</p>
+                </div><!-- pergunta -->
+                <hr/>
+                <div id="resposta">
+                    <h3>Resposta de {{ resposta.medico }} em {{ resposta.data_hora }}:</h3>
+                    <p>{{ resposta.conteudo }}</p>
+                </div><!-- Resposta -->
+            </div><!-- form-container -->
+        {% endfor %}
+    {% else %}
+        <div id="form-container" class="cool-background">
+            <p>Não há perguntas registradas.</p>
+        </div><!-- form-container -->
+    {% endif %}
+{% endblock %}

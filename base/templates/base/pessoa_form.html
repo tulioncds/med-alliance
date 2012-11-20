@@ -1,0 +1,38 @@
+<script type="text/javascript" src="{{STATIC_URL}}jquery/js/jquery.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}jquery/js/jquery.formset.js"></script>
+{% load pessoa_tags %}
+{{ form.media }}
+<script type="text/javascript">
+   $(function() {
+       var i = 0;
+	   {% for formset in formsets %}
+       $('.{{ formset.prefix }}').formset({
+              prefix: '{{ formset.prefix }}',
+              formCssClass: 'dynamic-formset' + i
+       });
+       i++;
+       {% endfor %}
+   })
+</script>
+<form id="pessoa_form" name="input" action="" method="POST">
+{% csrf_token %}
+{{form.as_p}}
+{% for formset in formsets %}
+<h3>{{ formset.model|verbose_name_plural }}</h3>
+{% if formset.errors %}
+<ul>
+{% for error in formset.errors %}  
+{% if error %}<li>{{ error }}</li>{% endif %}
+{% endfor %}
+</ul>
+{% endif %}
+{% for f in formset %}
+<div class="formset {{ formset.prefix }}">
+    {{f.as_p}}
+    {% if f.instance.pk %}{{ f.DELETE }}{% endif %}
+</div>
+{% endfor %}
+{{ formset.management_form }}
+{% endfor %}
+<input type="submit" />
+</form>

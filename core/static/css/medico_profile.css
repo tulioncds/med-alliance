@@ -1,0 +1,16 @@
+.medico-perfil {
+    margin-top: 3% !important;
+}
+
+.foto-medico {
+    width: 200px;
+}
+
+.coluna-informacoes-medico {
+    margin-top: 2%;
+}
+
+#map-canvas {
+    margin-left: 25% !important;
+    margin-top: 3% !important;
+}

@@ -1,0 +1,6 @@
+{% extends "schedule/base.html" %}
+{% load scheduletags %}
+{% block body %}
+{% prevnext "compact_calendar" calendar.slug periods.month "F Y"%}
+{% month_table calendar periods.month "small" %}
+{% endblock %}

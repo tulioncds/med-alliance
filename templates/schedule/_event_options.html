@@ -1,0 +1,13 @@
+{% load scheduletags %}
+<span class="actions">
+</span>
+{% if delete_event %}
+{% if user.profile.tipo_usuario != 'P' or occurrence.event.creator == user %}
+<span class="delete">
+<a href="#" data-url="{{delete_event}}" data-next="{% url day_calendar calendar.slug %}{% querystring_for_date date 3 %}">
+    <img border="0" src="{{ STATIC_URL }}schedule/img/delete.png" alt="Delete Event">
+</a>
+</span>
+{% endif %}
+{% endif %}
+</span>

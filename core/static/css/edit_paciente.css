@@ -1,0 +1,14 @@
+.edit-paciente-form {
+    margin: 64px 109px 80px 105px;
+    padding: 0 0 0 22px;
+}
+
+#edit-paciente-icon {
+    height: 150px;
+    margin-top: 100px;
+    margin-left: 378px;
+}
+
+.controls input {
+    height: 25px;
+}

@@ -1,0 +1,9 @@
+Olá {{ medico.nome }}!
+
+Você foi convidado para o evento {{ evento.titulo }}.
+
+{{ evento.descricao }}
+
+Acontecerá de {{ evento.inicio|date:'d/m/Y H:i' }} até {{ evento.fim|date:'d/m/Y H:i' }}.
+
+Med Alliance.

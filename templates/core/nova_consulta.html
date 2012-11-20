@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/nova_consulta.js"></script>
+{% endblock %}
+
+{% block main_menu_options %}
+    <ul class="nav pull-right">
+        <li id="fat-menu" class="dropdown">
+            <a id="dLabel" role="button" class="dropdown-toggle" data-toggle="dropdown" href="#">
+                {{ user.username }}
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                 <li>
+                    <a href="{% url edit_paciente user.pk %}">Editar</a>
+                </li>
+                <li>
+                    <a href="{% url delete_paciente user.pk %}">Excluir Conta</a>
+                </li>
+                <li>
+                    <a href="{% url logout %}">Sair</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <ul class="nav">
+        <li>
+            <a href="{% url home user.pk %}">Home</a>
+        </li>
+        <li>
+            <a href="{% url medico_list user.pk %}">Médicos</a>
+        </li>
+        <li>
+            <a href="{% url ver_respostas user.pk %}">Mensagens</a>
+        </li>
+        <li>
+            <a href="{% url fale_conosco user.pk %}">Fale Conosco</a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+   <div class="voltar_btt"> 
+	<a class="brand" href="{% url medico_list user.pk %}"> 
+		<img src="{{STATIC_URL}}img/back.png"/><br /> voltar
+    </a>
+
+  </div>
+
+   <div class="form-consulta">
+        <h5>Agendar nova consulta com Dr. <a href="{% url medico_profile medico.id %}">{{ medico.nome }}</a></h5>
+
+        <div id="calendario">{{ calendario|safe }}</div>
+        <div id="agenda"></div>
+    </div>
+{% endblock %}

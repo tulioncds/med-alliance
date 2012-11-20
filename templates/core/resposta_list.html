@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% load bootstrap %}
+
+{% block extrahead %}
+    <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/home_paciente.css" />
+    <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/respostas.css" />
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-dropdown.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/dropdowns.js"></script>
+{% endblock %}
+
+{% block main_menu_options %}
+    <ul class="nav pull-right">
+        <li id="fat-menu" class="dropdown">
+            <a id="dLabel" role="button" class="dropdown-toggle" data-toggle="dropdown" href="#">
+                {{ user.username }}
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <li>
+                    <a href="{% url edit_medico user.pk %}">Editar</a>
+                </li>
+                <li>
+                    <a href="{% url delete_medico user.pk %}">Excluir Conta</a>
+                </li>
+                <li>
+                    <a href="{% url logout %}">Sair</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <ul class="nav">
+        <li>
+            <a href="{% url home user.pk %}">Home</a>
+        </li>
+        <li class="active">
+            <a href="{% url respostas user.pk %}">Mensagens</a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <h2 class="perguntas-title">Perguntas Pendentes</h2>
+    <hr/>
+    {% if perguntas %}
+        {% for pergunta in perguntas %}
+            <hr/>
+                <div id="form-container" class="cool-background">
+                    <form action="{% url respostas user.pk %}" method="post">
+                    {% csrf_token %}
+                    <div id="pergunta">
+                        <p>Pergunta:</p>
+                        <p>{{ pergunta.conteudo }}</p>
+                    </div><!-- pergunta -->
+                    <div id="resposta">
+                    <p>{{ form|bootstrap }}</p>
+                    <input type="hidden" name="medico_pk" value="{{ user.pk }}"/>
+                    <input type="hidden" name="paciente_pk" value="{{ pergunta.paciente.pk }}"/>
+                    <input type="hidden" name="pergunta_pk" value="{{ pergunta.pk }}"/>
+                    <input type="submit" class="btn btn-primary" value="Responder"/>
+                    </div><!-- Resposta -->
+                </form>
+            </div><!-- form-container -->
+        {% endfor %}
+        {% else %}
+            <div id="form-container" class="cool-background">
+                <p>Não há perguntas pendentes no momento.</p>
+            </div><!-- form-container -->
+        {% endif %}
+{% endblock %}

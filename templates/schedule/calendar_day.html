@@ -1,0 +1,22 @@
+{% extends "schedule/base.html" %}
+{% load scheduletags %}
+
+
+{% block body %}
+
+{% include "schedule/_dialogs.html" %}
+<div class="tablewrapper">
+    <div class="calendarname">{{ calendar.name }}</div>
+    <div class="prevnext"><b>{{ periods.day.start|date:"l, F d, Y" }}</b></div>
+</div>
+<div style="position:absolute;">
+    <div style="position:absolute;left:100px;">
+      {% daily_table periods.day 420 120 600 8 12 %}
+    </div>
+
+    <div style="position:absolute;left:600px;">
+      {% daily_table periods.day 420 120 600 14 18 %}
+    </div>
+</div>
+
+{% endblock %}

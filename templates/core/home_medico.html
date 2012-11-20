@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block extrahead %}
+    <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/home_paciente.css" />
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-dropdown.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/dropdowns.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/nova_consulta.js"></script>
+{% endblock %}
+
+{% block main_menu_options %}
+    <ul class="nav pull-right">
+        <li id="fat-menu" class="dropdown">
+            <a id="dLabel" role="button" class="dropdown-toggle" data-toggle="dropdown" href="#">
+                {{ user.username }}
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <li>
+                    <a href="{% url edit_medico user.pk %}">Editar</a>
+                </li>
+                <li>
+                    <a href="{% url delete_medico user.pk %}">Excluir Conta</a>
+                </li>
+                <li>
+                    <a href="{% url logout %}">Sair</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <ul class="nav">
+        <li class="active">
+            <a href="{% url home user.pk %}">Home</a>
+        </li>
+        <li>
+            <a href="{% url respostas user.pk %}">Mensagens</a>
+        </li>
+        <li>
+            <a href="{% url fale_conosco user.pk %}">Fale Conosco</a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+
+
+    <div id="row1" class="row">
+        <div class="span3 offset11 logo-home-paciente">
+            <img src="{{STATIC_URL}}img/medalliance3.png"/>
+        </div><!-- span3 -->
+        <div class="span5 offset4 cool-background notificacoes-home-paciente">
+            <legend class="notificacao">Notificações</legend>
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <ul>
+                    <li>
+                        <p>Sem notificações </p>
+                    </li>
+                </ul>
+            {% endif %}
+        </div><!-- span9 -->
+    </div>
+    <div  id="row2" class="row">
+        <div class="span3" id="calendario">
+            {{ calendario|safe }}
+        </div>
+        <div class="span5" id="agenda">
+        </div>
+    </div><!-- row1 -->
+      
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% load bootstrap %}
+
+{% block extrahead %}
+    <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/home_paciente.css" />
+    <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/enviar_pergunta.css" />
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-dropdown.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/dropdowns.js"></script>
+{% endblock %}
+
+{% block main_menu_options %}
+    <ul class="nav pull-right">
+        <li id="fat-menu" class="dropdown">
+            <a id="dLabel" role="button" class="dropdown-toggle" data-toggle="dropdown" href="#">
+                {{ user.username }}
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <li>
+                    <a href="{% url logout %}">Sair</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <ul class="nav">
+        <li>
+            <a href="{% url home user.pk %}">Home</a>
+        </li>
+        <li>
+            <a href="{% url medico_list user.pk %}">Médicos</a>
+        </li>
+        <li class="active">
+            <a href="{% url fale_conosco user.pk %}">Fale Conosco</a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <div id="nova-pergunta-icon-container">
+        <img id="nova-pergunta-icon" src="{{STATIC_URL}}img/nova_pergunta.png"/>
+    </div><!-- nova-pergunta-icon-container -->
+    <div id="nova-pergunta-form" class="cool-background">
+        <form action={% url nova_pergunta user.pk %} method="post">
+            {% csrf_token %}
+            <input type="hidden" id="medico-questionado" name="medico-questionado" value="{{medico.pk}}"/>
+            {{ form|bootstrap }}
+            <input type="submit" value="Enviar" class="btn btn-primary"/>
+        </form>
+    </div><!-- nova-pergunta -->
+{% endblock %}

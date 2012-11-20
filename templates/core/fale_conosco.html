@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% load bootstrap %}
+
+{% block extrahead %}
+    <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/home_paciente.css" />
+    <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/fale_conosco.css" />
+    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-dropdown.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/dropdowns.js"></script>
+{% endblock %}
+
+{% block main_menu_options %}
+    <ul class="nav pull-right">
+        <li id="fat-menu" class="dropdown">
+            <a id="dLabel" role="button" class="dropdown-toggle" data-toggle="dropdown" href="#">
+                {{ user.username }}
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <li>
+                    <a href="{% url logout %}">Sair</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <ul class="nav">
+        <li>
+            <a href="{% url home user.pk %}">Home</a>
+        </li>
+        <li>
+            <a href="{% url medico_list user.pk %}">Médicos</a>
+        </li>
+        <li class="active">
+            <a href="{% url fale_conosco user.pk %}">Fale Conosco</a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <div id="fale-conosco" class="cool-background">
+        <form action={% url fale_conosco user.pk %} method="post">
+            {% csrf_token %}
+            {{ form|bootstrap }}
+            <input type="submit" value="Enviar" class="btn btn-primary"/>
+        </form>
+    </div><!-- fale-conosco -->
+    <div id="imagens-fale-conosco">
+        <img src="{{STATIC_URL}}img/fale_conosco.png"/>
+    </div><!-- imagens-fale-conosco -->
+{% endblock %}

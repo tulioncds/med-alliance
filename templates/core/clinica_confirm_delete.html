@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="hero-unit cool-background confirmacao-exclusao-hero">
+        <div class="row">
+            <img class="confirmation-icon" src="{{STATIC_URL}}img/exclamation.png"/>
+            <h2 style="text-align: center;">Tem certeza da exclusão da conta?</h2>
+            <hr/>
+            <p>Ao remover sua conta, perderá todo o histórico de consultas e agendamentos, assim como os benefícios propiciados pela Med Alliance.</p>
+            <p>
+            <hr/>
+            <form name="confirmar_delete" action="{% url delete_clinica user.pk %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" value="{{ user.pk }}" name="id"/>
+                <input type="submit" value="Excluir conta"/>
+            </form>
+            <form name="cancelar_delete" action="{% url auth %}" method="get">
+            	<input type="submit"  value="cancelar exclusão"/>
+            </form>
+            </p>
+        </div><!-- row -->
+    </div><!-- hero-unit -->
+</div><!-- container -->
+{% endblock %}

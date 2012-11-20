@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Cadastro de usuário{% endblock %}
+
+{% block extrahead %}
+    <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/choose_type.css" />
+		<script type="text/javascript" src="{{ STATIC_URL }}js/choose_type.js"></script>
+{% endblock %}
+
+{% block content %}
+    <h2 id="cadastro-title">Cadastro</h2>
+    <div class="container">
+        <div id="dock-container">
+            <div id="dock">
+                <ul>
+                    <li><span>Médico</span><a href="" class="tipo-cadastro" data-tipo-usuario="medico"><img src="{{STATIC_URL}}img/medico.png"/></a></li>
+                    <li><span>Paciente</span><a href="" class="tipo-cadastro" data-tipo-usuario="paciente"><img src="{{STATIC_URL}}img/paciente.png"/></a></li>
+                    <li><span>Clínica</span><a href="" class="tipo-cadastro" data-tipo-usuario="clinica"><img src="{{STATIC_URL}}img/clinica.png"/></a></li>
+                </ul>
+            <div class="base"></div>
+            </div><!-- dock -->
+        </div><!-- dock-container -->
+        <!-- compatibility -->
+        <p id="ua-string" style="margin:2em 0; color:#ddd; font-style:italic; font-size:.8em"></p>
+        <div id="cadastro-usuario">
+            <p id="cadastro-form-placeholder">Escolha o tipo de cadastro que deseja fazer.</p>
+        </div><!-- cadastro-usuario -->
+    </div><!-- container -->
+{% endblock %}
